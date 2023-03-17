@@ -1,0 +1,142 @@
+body {
+    background-color: #1e1e1e;
+    color: #fff;
+    font-family: 'inter';
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .container {
+    background-color: #2d2d2d;
+    padding: 16px;
+    border-radius: 16px;
+    max-width: 400px;
+   
+    width: 100%;
+    box-shadow: 8px 8px 16px #1e1e1e, -8px -8px 16px #3f3f3f;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  input[type="text"] {
+    padding: 8px;
+    border:0;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    width: 100%;
+    background-color: #3a3a3a;
+    color: #fff;
+    box-sizing: border-box;
+  }
+  
+  .button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 8px 8px 16px #1e1e1e, -8px -8px 16px #3f3f3f;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #3e8e41;
+    box-shadow: none;
+  }
+  
+  pre {
+    font-family: 'inter';
+    background-color: #3a3a3a;
+    padding: 8px;
+    border:0;
+    border-radius: 4px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    text-align: left;
+  }
+  
+  .error{
+    width: var(--component_width);
+    height: 1.18vw;
+    font-size: 14px;
+    margin-bottom:10px;
+    margin-top: 10px;
+    text-align: left;
+    color:red;
+ }
+
+ /* custom dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 16px;
+   
+}
+  .dropdown-toggle {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.83vw 16px;
+    gap: 16px;
+    height:3.33vw;
+    color:white;
+    width: 280px;
+    background: #3a3a3a;
+    border: 0.07vw solid gray4;
+    border-radius: 0.56vw;
+  }
+  
+  
+  
+  .dropdown-menu {
+    box-sizing: border-box;
+    display: none;
+    position: absolute;
+    top: 3.3vw;
+    justify-content: space-between;
+    z-index: 1;
+    transition: all 0.3s ease;
+    padding: 0.83vw 16px;
+    gap:16px;
+    width: 280px;
+    color:white;
+    background:#3a3a3a;
+    border: 0
+  }
+  
+  .dropdown-item {
+    cursor: pointer;
+    background-color:  #3a3a3a;
+    border: none;
+    width: 37.22vw;
+    color:white;
+    height:47.95px;
+    width: 100%;
+    text-align: left;
+  }
+  .dropdown-menu.show {
+    display: block;
+  }  
+  
+  li:focus-within > button > .arrow {
+    transform: rotate(-225deg);
+    background:white;
+    margin-top: 0.28vw;
+  }

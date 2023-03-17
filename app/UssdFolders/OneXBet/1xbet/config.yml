@@ -1,0 +1,41 @@
+pages:
+    #processing
+    process: "Your request is being processed, you will receive an sms shortly."
+    #plans
+    plans: "Select payment plan:\n1. One-Off (N10)\n2. Weekly Subscription (N50)"
+    # new customers
+    new_user: "Enter 4 digit pin to create your 1XBET account: "
+    create_account: "Create 1XBET Account for 07066192100. Please select Service cost plan below:\n1. One-Off (N10)\n2. Weekly Subscription (N50)"
+    confirm_account:  "Your 1XBET Account has been created successfully"
+    #reset
+    reset:  "To recover your 1XBET PIN or Password please go to https://1xbet.ng/en/user/forgotpassword/"
+    # existing customers
+    menu: "1. Play\n2. My Account\n3. Top Up\n4. Withdraw Funds\n5. Reset PIN"
+
+    play: "1. Matches of the day"
+    match_of_day: "1. RealM V ATL (UCL)\n2. ManC V BMH (UCL)\n3. Roth V Watf (UCL)"
+    match_menu2: "RealM V ATL Enter Score (eg 2*1): "
+    match_menu3: "RealM V ATL (2-1) Odds: 8.50 Enter Stake (eg. 50- 100000): "
+    match_options:  "Select stake option: \n1. Home Win\n2. Draw\n3. Away Win\n4. Home Win or Draw\n5. Either Home or Away Win\n6. Away Win or Draw"
+    match_amount:  "Enter amount: "
+    match_pin:  "Enter PIN to Place Bet: "
+    notification:  "Bet Accepted\nBet Slip NO: "
+    esports:  "1. DOTA\n2. League Of Legends\n3. King Of Glory"
+    esports_menu1:  "1. Sparking Arrow V Elephant"
+    esports_menu2:  "1. Sparking Arrow (4.64 odds)\n2. Elephant (1.18)"
+    esports_menu3: "Sparking Arrow\nodds: 4.64\nEnter Stake eg. (50- 100000): "
+    esports_pin: "Sparking Arrow\nodds: 4.64\nStake: 1000\nPotential winning: N4640\nService costs N10.\nEnter PIN to Place Bet: "
+
+    my_account: "Check Balance. Enter Pin: "
+    balance: "Your 1XBET Account.\nMain: 0.00 NGN.\nBonus: 0.00 NGN"
+
+    top_up: "Top-up 1XBET wallet with USSD bank transfer.\nEnter Amount (must be above N30):"
+    topup_pin:  "Enter PIN: "
+    bank: "Select Bank:\n1. Zenith Bank\n2. Gurantee Trust Bank\n3. United Bank For Africa\n4. Stanbic Bank\n5. Sterling Bank\n6. Unity Bank\n7. Keystone Bank\n8. Fidelity Bank\n9. Eco Bank\n10. Wema Bank\n11. Access Bank\n12. First Bank Nigeria\n00 Back"
+    topup_notification: "Dial *966*000*1234# to Authorize your payment to 1XBET. Ensure your USSD banking is enabled"
+    
+    withdraw: "Transfer funds to your bank account.\nEnter Amount: "
+    account:  "Enter beneficiary bank account number: "
+    pin:  "Enter PIN to continue: "
+    account_name:  "Enter beneficiary name: "
+    withdraw_notification:  "You have successfully transfered N1000 to David Gbemi"

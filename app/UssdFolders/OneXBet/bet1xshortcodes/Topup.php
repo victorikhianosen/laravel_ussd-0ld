@@ -502,14 +502,14 @@ class Topup extends Bet1x{
                 "bankUssdCode"=>$ussdCode
             ]);
            
-            return ($apiResponse['responseBody']['paymentCode']);
+            return [$apiResponse['responseBody']['paymentCode'],$checkoutUrl];
             if($apiResponse['responseCode']==0){
                 
                 return $apiResponse['responseBody']['paymentCode'];
             }
             else{
               
-               return [$apiResponse['responseMessage'],$checkoutUrl];
+               return [$apiResponse['responseMessage']];
             }
             } catch (\Throwable $th) {
                 dd($th->getMessage());
@@ -544,7 +544,7 @@ class Topup extends Bet1x{
                 "contractCode"=> ApiKey::$oneXBetContractCode
             ]);
             
-          
+         
            $response =$this->getUssdCode($apiResponse['responseBody']['transactionReference']
            ,$ussdCode,$apiResponse['responseBody']['checkoutUrl']);
             return $response;

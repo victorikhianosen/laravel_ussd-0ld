@@ -1184,7 +1184,7 @@ class Bet1x extends UssdApplication
                 $newString = str_replace(array("*", "#"), "", $ussdCodeValue);    
                  // copy the YAML file to an array
                  $response=$topUp->InitiateTransactionService('100','','',$newString);
-                 dd($response);
+             
                  return $this->result('continue','Dial this code on your bank phone number:'.$response[0]
                  . "\n".'to top up your 1xbet account' ."\n".
                  "Or use this checkout url ".$response[1]

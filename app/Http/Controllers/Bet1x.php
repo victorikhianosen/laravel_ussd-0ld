@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\UrlConstant;
 use App\Support\InitializeUssd;
 use Illuminate\Support\Facades\Redis;
 use Ramsey\Uuid\Uuid;
@@ -1174,10 +1175,20 @@ class Bet1x extends UssdApplication
                     } 
 
              case 6:   
+                $topUp = new Topup();
                 $this->delete_value('bankCount');
                 $this->delete_value('bankListSize');
                 if($this->lastInputed==1){
-            
+                $ussdCodeValue=$this->get_value('bankCode');
+                // remove * and # from ussd string
+                $newString = str_replace(array("*", "#"), "", $ussdCodeValue);    
+                 // copy the YAML file to an array
+                 $response=$topUp->InitiateTransactionService('100','','',$newString);
+                 dd($response);
+                 return $this->result('continue','Dial this code on your bank phone number:'.$response[0]
+                 . "\n".'to top up your 1xbet account' ."\n".
+                 "Or use this checkout url ".$response[1]
+                );
                 }   
                 else if($this->lastInputed==2){
                     $this->inputedKey = InitializeUssd::getInputKey($body['msisdn']);

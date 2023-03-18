@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "astatroth/laravel-timer": "dev-master",
         "doctrine/dbal": "^3.6",
         "gabordemooij/redbean": "5.7.3",
         "guzzlehttp/guzzle": "^7.2",

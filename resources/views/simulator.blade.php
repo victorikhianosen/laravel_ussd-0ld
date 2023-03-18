@@ -21,13 +21,48 @@
     <body >
       
       <div class="main_content">
+        <h1>Session Time Left: <span id="time-left">60</span> seconds</h1>
+        <div id="timer-expired" style="display: none;">
+            <p>Session is Over!</p>
+        </div>
         @livewire('simulator')
       </div>
       </div>
       {{-- live wire script --}}
         @livewireScripts
     </body>
-      
-      @yield('javascript')
+      <script>
+         let timeLeft = 60;
+        let timer;
+        function resetTimer() {
+            clearInterval(timer);
+            timeLeft = 60;
+            updateTimerDisplay();
+        }
+       
+
+        function startTimer() {
+            timer = setInterval(function() {
+                timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    document.getElementById('time-left').style.display = 'none';
+                    document.getElementById('timer-expired').style.display = 'block';
+                }
+            }, 1000);
+        }
+
+function updateTimerDisplay() {
+  document.getElementById('time-left').textContent = timeLeft;
+}
+          Livewire.on('dataReceived', function(data) {
+         resetTimer();
+         startTimer();
+        });
+
+     
+
+      </script>
   
 </html>

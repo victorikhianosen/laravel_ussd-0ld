@@ -83,7 +83,16 @@ Route::get('/hash', function(){
 
 });
 
-Route::get('/checking',[Topup::class,'fetchUssdBank']);
+Route::get('/checking',function (){
+
+    $timeLeft = 60;
+
+    while ($timeLeft > 0) {
+        echo "Time Left: {$timeLeft} seconds\n";
+        // sleep(1);
+        $timeLeft--;
+    }
+});
 
 
 

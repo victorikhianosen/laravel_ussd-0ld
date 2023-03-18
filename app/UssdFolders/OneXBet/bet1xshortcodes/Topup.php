@@ -5,6 +5,7 @@ use App\Http\Controllers\Bet1x;
 use Illuminate\Support\Facades\Http;
 use App\Constants\ApiKey;
 use Exception;
+use Illuminate\Support\Str;
 use Symfony\Component\Yaml\Yaml;
 use Ramsey\Uuid\Uuid;
 
@@ -437,7 +438,7 @@ class Topup extends Bet1x{
     public function fetchUssdBank($listOffset = 0,$length=5)
 {
 
-      // Write the YAML string to a file
+      // copy the YAML file to an array
       $yaml= file_get_contents('/Users/mac/Development/ussd/ussed_laravel/storage/app/public/responseFile/api-response.yml');  
       $data=Yaml::parse($yaml);  
     
@@ -480,8 +481,88 @@ class Topup extends Bet1x{
 
 
         }
-}
 
+        public function getUssdCode(string $transactionReference='MNFY|07|20230317185905|022999',
+        string $ussdCode='901',$checkoutUrl){
+            try {
+                // copy the YAML file to an array
+            $yaml= file_get_contents('/Users/mac/Development/ussd/ussed_laravel/storage/app/public/responseFile/api-response.yml');  
+            $data=Yaml::parse($yaml);  
+            
+            $token= $data['responseBody']['accessToken']; 
+            $headers = [
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer '.$token,
+            ];
+            
+            $apiResponse= Http::withHeaders(
+                $headers
+            )->post(UrlConstant::$getUssdCodeUrl,[
+                "transactionReference"=>$transactionReference,
+                "bankUssdCode"=>$ussdCode
+            ]);
+           
+            return ($apiResponse['responseBody']['paymentCode']);
+            if($apiResponse['responseCode']==0){
+                
+                return $apiResponse['responseBody']['paymentCode'];
+            }
+            else{
+              
+               return [$apiResponse['responseMessage'],$checkoutUrl];
+            }
+            } catch (\Throwable $th) {
+                dd($th->getMessage());
+                return $th->getMessage();
+            }
+        }
+
+        public function InitiateTransactionService(string $amount,string $customerEmail='',
+        
+        string $customerName='', string $ussdCode){
+            try {
+                // copy the YAML file to an array
+            $yaml= file_get_contents('/Users/mac/Development/ussd/ussed_laravel/storage/app/public/responseFile/api-response.yml');  
+            $data=Yaml::parse($yaml);  
+            
+            $token= $data['responseBody']['accessToken']; 
+            $headers = [
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer '.$token,
+            ];
+            $referenceCode=substr(md5(rand()), 0, 15); Str::random(15);
+            $apiResponse= Http::withHeaders(
+                $headers
+               
+            )->post(UrlConstant::$initiateMonnifyTransactionUrl,[
+                "amount" => $amount,
+                "customerName" => 'Stephen Ikhane',
+                "customerEmail" =>'stephen@ikhane.com',
+                "paymentReference" => $referenceCode,
+                "paymentDescription" => 'Top Up',
+                "currencyCode" =>'NGN',
+                "contractCode"=> ApiKey::$oneXBetContractCode
+            ]);
+            
+          
+           $response =$this->getUssdCode($apiResponse['responseBody']['transactionReference']
+           ,$ussdCode,$apiResponse['responseBody']['checkoutUrl']);
+            return $response;
+        
+        
+            } catch (\Throwable $th) {
+
+                dd($th->getMessage());
+                return $th->getMessage();
+            }
+        }
+
+
+      
+
+        }
+
+//   
 
 
 ?>

@@ -4,8 +4,6 @@ namespace App\Http\Livewire;
 
 
 use App\Http\Controllers\StartUssd;
-
-use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
 
@@ -28,10 +26,16 @@ class Simulator extends Component
     public $className;
     public $key;
 
+    protected $timers;
+
     protected $rules=[
         'content'=>'max:12|min:0',
         'msisdn'=>'string|required|nigeria_phone', 
     ];
+
+    public $timeLeft = 60;
+   
+
 
     public function updated($propertyName){
         $this->validateOnly($propertyName);
@@ -47,6 +51,9 @@ class Simulator extends Component
     {
 
         try {
+
+            $data = ['foo' => 'bar'];
+        $this->emit('dataReceived', $data);
             $validate = $this->validate();
             if(isset($validate)){
 

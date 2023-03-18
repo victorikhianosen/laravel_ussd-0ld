@@ -64,6 +64,7 @@ class Bet1x extends UssdApplication
         ];
 
         $response = $this->api2($url,$payload);
+        
         $content = $this->posted['content'];
     //    $response = $this->api($url,$phone);
         // return $this->existingCustomer($body);  
@@ -125,9 +126,10 @@ class Bet1x extends UssdApplication
             return $this->newCustomer($body);  
         }
 
-
-
     }
+
+
+
 
     public function newCustomer($body)
     {
@@ -1184,7 +1186,6 @@ class Bet1x extends UssdApplication
                 $newString = str_replace(array("*", "#"), "", $ussdCodeValue);    
                  // copy the YAML file to an array
                  $response=$topUp->InitiateTransactionService('100','','',$newString);
-             
                  return $this->result('continue','Dial this code on your bank phone number:'.$response[0]
                  . "\n".'to top up your 1xbet account' ."\n".
                  "Or use this checkout url ".$response[1]

@@ -543,7 +543,7 @@ class Topup extends Bet1x{
                 "currencyCode" =>'NGN',
                 "contractCode"=> ApiKey::$oneXBetContractCode
             ]);
-            
+          
          
            $response =$this->getUssdCode($apiResponse['responseBody']['transactionReference']
            ,$ussdCode,$apiResponse['responseBody']['checkoutUrl']);

@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         // $schedule->command('printOut')->everyTwoMinutes();
         // fetch access token every 30 minutes
-        $schedule->command('fetch:access_token')->everyTwoMinutes();
+        $schedule->command('fetch:access_token')->everyMinute();
         $schedule->command('printOut')->everyTwoMinutes();
     }
 

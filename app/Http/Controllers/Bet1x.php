@@ -64,11 +64,11 @@ class Bet1x extends UssdApplication
         ];
 
         $response = $this->api2($url,$payload);
-        
         $content = $this->posted['content'];
     //    $response = $this->api($url,$phone);
         // return $this->existingCustomer($body);  
         // var_dump(!empty($response), $response); exit;
+        // dd($response);
         if(isset($response->data) || !empty($response)){
             //check if user exist in the database
             $check = $this->ussdUsers();
@@ -1186,9 +1186,12 @@ class Bet1x extends UssdApplication
                 $newString = str_replace(array("*", "#"), "", $ussdCodeValue);    
                  // copy the YAML file to an array
                  $response=$topUp->InitiateTransactionService('100','','',$newString);
-                 return $this->result('continue','Dial this code on your bank phone number:'.$response[0]
+                 $message='Dial this code on your bank phone number:'.$response[0]
                  . "\n".'to top up your 1xbet account' ."\n".
-                 "Or use this checkout url ".$response[1]
+                 "Or use this checkout url ".$response[1];
+                //  send sms to phone number
+                 $this->sms($this->posted['msisdn'],$message);
+                 return $this->result('end',$message
                 );
                 }   
                 else if($this->lastInputed==2){

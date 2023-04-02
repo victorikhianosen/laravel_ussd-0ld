@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StartUssd;
 use App\Http\Controllers\LASMKeyGenController;
+use React\Socket\ConnectionInterface;
+use React\EventLoop\Loop;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -85,15 +88,31 @@ Route::get('/hash', function(){
 
 Route::get('/checking',function (){
 
-    $timeLeft = 60;
-
-    while ($timeLeft > 0) {
-        echo "Time Left: {$timeLeft} seconds\n";
-        // sleep(1);
-        $timeLeft--;
-    }
+    $random = substr(md5(mt_rand()), 0, 15);
+    return $random;
 });
 
+Route::get('/connectWebsocket',function(){
+
+$loop = Loop::get();
+$connector = new React\Socket\Connector($loop);
 
 
-//to change folder permission // sudo chown -R gbemi:gbemi .   
+$stdin = new \React\Stream\ReadableResourceStream(STDIN, $loop);
+$stdout = new \React\Stream\WritableResourceStream(STDOUT, $loop);
+
+$connector
+    ->connect('127.0.0.1:8888')
+    ->then(
+        function (ConnectionInterface $conn) use ($stdout, $stdin) {
+            $stdin->pipe($conn)->pipe($stdout);
+        },
+        function (Exception $exception) use ($loop){
+            // reject
+        });
+
+$loop->run();
+
+});
+
+//to change folder permission // sudo chown -R gbemi:gbemi

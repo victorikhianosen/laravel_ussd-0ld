@@ -48,7 +48,12 @@
         @enderror
        @endif
 
+        @if ($deactiveButton==false)
         <button wire:click="submitValue" class="button">Submit</button>
+        @else
+           <p class="">End session</p> 
+        @endif
+       
     
 
     <div>

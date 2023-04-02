@@ -26,6 +26,8 @@ class Simulator extends Component
     public $className;
     public $key;
 
+    public $deactiveButton=false;
+
     protected $timers;
 
     protected $rules=[
@@ -75,6 +77,9 @@ class Simulator extends Component
         $response =$ussdInstance->index($this->result);
         $this->count=$this->count+1;
         $this->content=1;
+        if($response['action'] == 'end'){
+            $this->deactiveButton=true;
+        }
         $this->result= $response['reply'];
             }
 

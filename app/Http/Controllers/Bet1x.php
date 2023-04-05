@@ -1080,22 +1080,24 @@ class Bet1x extends UssdApplication
                     if($this->lastInputed==6 && $count>=1){
                     // display more list
                             
-                            if(intVal($this->listSize/5)<=$count){
-                                $banks = $topUp->fetchUssdBank($count*5);
-                                foreach ($banks as $index => $bank) {
-                                    $bankList .= ($index + 1) . '. ' . $bank['name'] . "\n";
-                                }
+                            // if(intVal($this->listSize/5)<=$count){
+                               
+                            //     $banks = $topUp->fetchUssdBank($count*5);
+                            //     foreach ($banks as $index => $bank) {
+                            //         $bankList .= ($index + 1) . '. ' . $bank['name'] . "\n";
+                            //     }
                                 
-                                $lastIndex = count($banks);
+                            //     $lastIndex = count($banks);
                                 
-                                $bankList .= "00. Back";
+                            //     $bankList .= "00. Back";
                                   
-                                return $this->cancelLastAction($bankList); 
+                            //     return $this->cancelLastAction($bankList); 
 
-                            }
-                            else{
+                            // }
+                            
                                 $banks = $topUp->fetchUssdBank($count*5);
                                 $count+=1;
+                                // dd($count);
                                 $this->set_value('bankCount', $count); 
                                 foreach ($banks as $index => $bank) {
                                     $bankList .= ($index + 1) . '. ' . $bank['name'] . "\n";
@@ -1106,7 +1108,7 @@ class Bet1x extends UssdApplication
                                 $bankList .= "00. Back";
                                
                                 return $this->cancelLastAction($bankList); 
-                        }
+                        
                     }
                     // When the bank number selected  is 00 or back
                     if($this->lastInputed==00 && $count>=1){
@@ -1168,13 +1170,19 @@ class Bet1x extends UssdApplication
                     else if($this->lastInputed!=00 || $this->lastInputed!=6){
                     //   get amount to top up with
                     $amount=$this->get_value('topup');
-                    $bankDetails=$topUp->getBankDetails((((intval($count)-1)*5)+ intval($this->lastInputed))-1);
+                    
+                    $bankDetails=$topUp->getBankDetails((((intval($count)-1)*5)+ intval($this->lastInputed)-1));
                     $this->set_value('bankCode',  $bankDetails[1]); 
+                   
                     //  get the bank name 
                         // $this->delete_value('bankCount');
                         // $this->delete_value('bankListSize');
                         return $this->result('continue','You will like to top up your 1xbet'. "\n" .'account with ₦'.$amount. ' using '.$bankDetails[0] .'?'.  "\n" .' 1. Yes'. "\n" . '2. No');  
                     } 
+
+                    // if($this->lastInputed!=00 || $this->lastInputed!=6 || $this->lastInputed<=5 || $this->lastInputed>=1){
+                    //     return $this->cancelLastAction($bankList); 
+                    // }
 
              case 6:   
                 $topUp = new Topup();

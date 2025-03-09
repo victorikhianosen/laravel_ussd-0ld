@@ -69,7 +69,18 @@ public function ValidateBVN($body)
                 return $this->cancelLastAction("$description\n" . $this->render("enter_bvn_lapo"));
             }
         }else {
-            return  $this->result("end", "Service temporarily unavailable\n Could not verify bvn, please try again");
+            $count= $this->get_value('bvn_entry_count');
+            // dd($count);
+            if($count==null || $count<=1){
+                $count=$count+1;
+                $this->set_value('bvn_entry_count',$count);
+                return  $this->cancelLastAction( $request->description. "\n". $this->render("enter_bvn_lapo"));  
+            }
+            else if ($count==2){
+                $this->delete_value('bvn_entry_count');
+                return  $this->end( $request->description);
+            }
+           
         }
     }else{
         return  $this->result("end", "Service temporarily unavailable\n Please try again");

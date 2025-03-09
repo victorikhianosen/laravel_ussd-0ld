@@ -18,7 +18,7 @@ define('LOGFILE', 'ussd.log');
 define('CONTINUE_SESSION', 'Continue');
 define('END_SESSION', 'End');
 define('UNKNOWN_APPLICATION', 'Unknown');
-define('DEFAULT_APPS_CONFIG_FILE', '/Users/mac/Development/ussd/ussed_laravel/apps.yml');
+define('DEFAULT_APPS_CONFIG_FILE', '/Users/user/Documents/ussed_laravel/apps.yml');
 define('ORACLE_USERNAME', 'novaji');
 define('ORACLE_PASSWORD', 'Amore09092015_');
 define('ORACLE_HOST', 'localhost');
